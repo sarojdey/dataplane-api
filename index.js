@@ -17,7 +17,6 @@ app.use(
   cors({
     origin: "https://dataplane.vercel.app",
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   })
 );
 
