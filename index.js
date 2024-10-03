@@ -11,8 +11,16 @@ const cookieParser = require("cookie-parser");
 dotenv.config();
 
 const app = express();
+const cors = require("cors");
 
-app.use(cors({ origin: "https://dataplane.vercel.app", credentials: true }));
+app.use(
+  cors({
+    origin: "https://dataplane.vercel.app",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  })
+);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
