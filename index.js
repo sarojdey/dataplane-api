@@ -13,13 +13,19 @@ const app = express();
 
 app.use(
   cors({
-    origin:
-      process.env.NODE_ENV === "production"
-        ? "https://dataplane.vercel.app"
-        : "http://localhost:5173",
+    origin: "https://dataplane.vercel.app",
     credentials: true,
   })
 );
+// app.use(
+//   cors({
+//     origin:
+//       process.env.NODE_ENV === "production"
+//         ? "https://dataplane.vercel.app"
+//         : "http://localhost:5173",
+//     credentials: true,
+//   })
+// );
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
