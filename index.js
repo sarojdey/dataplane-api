@@ -6,7 +6,6 @@ const ticketRoutes = require("./routes/ticket.route.js");
 const userRoutes = require("./routes/user.route.js");
 const commentRoutes = require("./routes/comment.route.js");
 const dotenv = require("dotenv");
-const cookieParser = require("cookie-parser");
 
 dotenv.config();
 
@@ -14,14 +13,16 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://dataplane.vercel.app",
+    origin:
+      process.env.NODE_ENV === "production"
+        ? "https://dataplane.vercel.app"
+        : "http://localhost:5173",
     credentials: true,
   })
 );
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/tickets", ticketRoutes);
 app.use("/api/user", userRoutes);

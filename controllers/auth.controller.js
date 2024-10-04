@@ -1,6 +1,6 @@
 const bcryptjs = require("bcryptjs");
 
-const generateTokenAndSetCookie = require("../utils/generateTokenAndSetCookie.js");
+const generateToken = require("../utils/generateToken.js");
 
 const { User } = require("../models/user.model.js");
 
@@ -31,7 +31,7 @@ const signup = async (req, res) => {
 
     await user.save();
 
-    const token = generateTokenAndSetCookie(res, user._id);
+    const token = generateToken(user._id);
 
     res.status(201).json({
       success: true,
@@ -63,7 +63,7 @@ const login = async (req, res) => {
         .json({ success: false, message: "Invalid credentials" });
     }
 
-    const token = generateTokenAndSetCookie(res, user._id);
+    const token = generateToken(user._id);
 
     user.lastLogin = new Date();
     await user.save();
